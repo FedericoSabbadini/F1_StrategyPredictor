@@ -1,0 +1,4 @@
+f1_db/
+f1_cache/
+*.sqlite
+*.ff1pkl
