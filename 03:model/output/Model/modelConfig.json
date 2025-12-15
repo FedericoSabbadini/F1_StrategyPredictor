@@ -1,0 +1,95 @@
+{
+  "sequence_length": 10,
+  "features_pit": [
+    "LapsRemainingNorm",
+    "LapsRemainingPct",
+    "TyreMargin",
+    "DeltaFromBest",
+    "MaxSectorDeg",
+    "RearDeg",
+    "SpeedLoss",
+    "PitUrgency",
+    "TyreAgeCubeRatio",
+    "MyStintVsField",
+    "MyTyreVsField",
+    "GapTrend",
+    "LapTimeTrend3",
+    "LapTimeTrend5",
+    "UnderCaution",
+    "LapsInStint"
+  ],
+  "features_compound": [
+    "IsSoft",
+    "IsMedium",
+    "IsHard",
+    "IsInter",
+    "HasUsedHard",
+    "HasUsedSoft",
+    "HasUsedMedium",
+    "StintNum",
+    "LapsRemainingPct",
+    "IsRaining",
+    "TrackTempNorm",
+    "PosNorm",
+    "TyreMargin",
+    "UnderCaution",
+    "SpeedLoss"
+  ],
+  "pit_threshold": 0.6462525129318237,
+  "compound_classes": [
+    "HARD",
+    "INTERMEDIATE",
+    "MEDIUM",
+    "SOFT",
+    "WET"
+  ],
+  "metrics": {
+    "pit": {
+      "auc": 0.9414652267055367,
+      "f1": 0.7563214085034651,
+      "accuracy": 0.8854249229414355,
+      "threshold": 0.6462525129318237
+    },
+    "compound": {
+      "accuracy": 0.8154997798326729,
+      "f1_weighted": 0.8162111001774022
+    }
+  },
+  "feature_importance": {
+    "pit": {
+      "LapsRemainingNorm": 0.14047930976096337,
+      "LapsRemainingPct": 0.10333646208323204,
+      "TyreMargin": 0.10032166493665196,
+      "DeltaFromBest": 0.03447398720525326,
+      "MaxSectorDeg": 0.02882336918512618,
+      "RearDeg": 0.021916289376237613,
+      "SpeedLoss": 0.013013899011314889,
+      "PitUrgency": 0.03875777586371898,
+      "TyreAgeCubeRatio": 0.05326274137385234,
+      "MyStintVsField": 0.04085266164594311,
+      "MyTyreVsField": 0.03532848193054897,
+      "GapTrend": 0.043227640480870355,
+      "LapTimeTrend3": 0.015168628576897195,
+      "LapTimeTrend5": 0.03066720407547267,
+      "UnderCaution": 0.007803359909302958,
+      "LapsInStint": 0.011315326457445226
+    },
+    "compound": {
+      "IsSoft": 0.040217231762806414,
+      "IsMedium": 0.10723616615294289,
+      "IsHard": 0.034815793336268865,
+      "IsInter": 0.01911052399823865,
+      "HasUsedHard": 0.023279025392631714,
+      "HasUsedSoft": 0.027770438866872138,
+      "HasUsedMedium": 0.008836048730368399,
+      "StintNum": 0.055071187435784506,
+      "LapsRemainingPct": 0.07344782034346098,
+      "IsRaining": 0.03188022897402024,
+      "TrackTempNorm": 0.038925583443416935,
+      "PosNorm": 0.015030089534713001,
+      "TyreMargin": 0.04238954939087036,
+      "UnderCaution": 0.014266842800528368,
+      "SpeedLoss": 0.011389989725524704
+    }
+  }
+}
