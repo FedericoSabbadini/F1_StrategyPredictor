@@ -220,7 +220,7 @@ Questo progetto rientra nell'uso educativo come definito nelle [F1 Guidelines](h
 > "Limited use of Other Intellectual Property Rights for educational purposes may be acceptable where the use is justified, limited, and non-commercial."
 
 Il progetto:
-- E' una tesi universitaria (non commerciale)
+- E' universitario (non commerciale)
 - Non ridistribuisce dati grezzi
 - Produce solo analisi aggregate e modelli ML
 - Non usa loghi, immagini o contenuti brandizzati F1
