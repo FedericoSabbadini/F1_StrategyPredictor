@@ -28,6 +28,7 @@ F1StrategyPredictor/
 ├── 02_DataAnalysis.ipynb    # EDA e pulizia dati
 ├── 03_LSTMModel.ipynb       # Training modelli
 ├── 04_RaceSimulator.ipynb   # Simulazione gare
+├── Relation                 # F1_StrategyPredictor.pdf = spiegazione scelte
 │
 ├── Data/
 │   ├── f1_dataset_combined.pkl
