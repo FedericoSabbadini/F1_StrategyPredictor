@@ -1,98 +1,270 @@
 # 🏎️ F1 Strategy Predictor
 
 [![Jupyter Notebook](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org)
-[![License](https://img.shields.io/badge/License-See%20Repo-blue.svg)](LICENSE)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.19-orange.svg)](https://www.tensorflow.org/)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 
-**Predizione pit stop e scelta compound per gare di Formula 1 usando modelli LSTM.**
+**Real-time pit stop timing and tire compound prediction for Formula 1 races using LSTM models.**
 
-## Overview
+---
 
-Il progetto utilizza dati telemetrici F1 (via FastF1) per addestrare due modelli di deep learning:
+## 📋 Overview
 
-1. **Pit Timing Model** — Prevede quando un pilota effettuerà un pit stop (classificazione binaria)
-2. **Compound Model** — Prevede quale gomma verrà montata (classificazione multiclass)
+This project uses F1 telemetry data (via FastF1 API) to train two deep learning models for race strategy prediction:
 
-I modelli sono basati su architettura LSTM con attention mechanism, addestrati su dati storici dal 2023 al 2025.
+1. **Pit Timing Model** — Predicts when a driver will pit (binary classification)
+2. **Compound Model** — Predicts which tire compound will be used next (multi-class classification)
 
-## Requisiti
+The models are based on LSTM architecture with attention mechanisms (compound model only), trained on historical data from 2022-2025.
 
+---
+
+## 🎯 Key Features
+
+- **Real-time predictions**: Lap-by-lap probability updates during race simulation
+- **Sequential modeling**: Uses 10-lap history windows for temporal pattern recognition
+- **Class imbalance handling**: Focal loss and class weighting for minority classes
+- **Comprehensive evaluation**: Per-class metrics, confusion matrices, optimal threshold selection
+
+---
+
+## 📊 Model Performance
+
+### Current Performance (Original Models)
+
+| Model | Metric | Value | 
+|-------|--------|-------|
+| **PIT** | AUC-ROC | 0.772 |
+| **PIT** | F1 Score | 0.523 |
+| **PIT** | Accuracy | 0.756 |
+| **COMPOUND** | Accuracy | 0.675 |
+| **COMPOUND** | F1 (weighted) | 0.664 |
+
+---
+
+## 🛠️ Requirements
+
+### Environment
 - Python 3.10+
-- Google Colab (consigliato) o ambiente locale con GPU
-- Librerie: TensorFlow, FastF1, pandas, numpy, matplotlib, scikit-learn, joblib
+- Google Colab (recommended) or local environment with GPU
+- 8GB+ RAM recommended
 
-## Struttura Progetto
+### Core Libraries
+```
+tensorflow>=2.19.0
+fastf1>=3.0.0
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+scikit-learn>=1.3.0
+joblib>=1.3.0
+```
+
+---
+
+## 📁 Project Structure
 
 ```
 F1StrategyPredictor/
-├── 01_DataLoader.ipynb      # Download dati da FastF1 API
-├── 02_DataAnalysis.ipynb    # EDA e pulizia dati
-├── 03_LSTMModel.ipynb       # Training modelli
-├── 04_RaceSimulator.ipynb   # Simulazione gare
-├── Relation                 # F1_StrategyPredictor.pdf = spiegazione scelte
 │
-├── Data/
-│   ├── f1_dataset_combined.pkl
-│   ├── f1_dataset_clean.pkl
-│   └── f1_dataset_featured.pkl
+├── 📓 Notebooks (Execute in Order)
+│   ├── 01_DataLoader.ipynb         # Download F1 telemetry data
+│   ├── 02_DataAnalysis.ipynb       # EDA, cleaning, feature engineering
+│   ├── 03_LSTMModel.ipynb          # Train LSTM models
+│   └── 04_RaceSimulator.ipynb      # Simulate races with trained models
 │
-└── Model/
-    ├── f1_pit_model.keras
-    ├── f1_compound_model.keras
-    ├── f1_pit_scaler.pkl
-    ├── f1_comp_scaler.pkl
-    ├── label_encoder.pkl
-    └── modelConfig.json
+├── 📄 Documentation
+│   ├── README.md                    # This file
+│   └── F1_StrategyPredictor.pdf    # Technical report (design choices)
+│
+├── 💾 Data (Generated)
+│   ├── f1_dataset_combined.pkl     # Raw combined data
+│   ├── f1_dataset_clean.pkl        # Cleaned data for training
+│   └── f1_dataset_featured.pkl     # Final dataset with engineered features
+│
+├── 🤖 Models (Generated)
+    ├── f1_pit_model.keras          # Trained PIT model
+    ├── f1_compound_model.keras     # Trained COMPOUND model
+    ├── f1_pit_scaler.pkl           # Feature scaler for PIT
+    ├── f1_comp_scaler.pkl          # Feature scaler for COMPOUND
+    ├── label_encoder.pkl           # Compound class encoder
+    └── modelConfig.json            # Model configuration
+
 ```
 
-## Pipeline
+---
 
-### 1. DataLoader
-Scarica i dati telemetrici dalla API FastF1.
+## 🚀 Quick Start
 
-**Note importanti:**
-- Il download è incrementale (un anno alla volta)
-- FastF1 ha rate limit (~100 richieste/ora)
-- La cache locale velocizza le esecuzioni successive
+### Option A: Use Pre-trained Models
 
-### 2. DataAnalysis
-Analisi esplorativa e pulizia dei dati: rimozione outlier, gestione valori mancanti, analisi distribuzione compound e pattern pit stop.
+1. **Open Simulator**
+   ```bash
+   # Open in Google Colab or Jupyter
+   jupyter notebook 04_RaceSimulator.ipynb
+   ```
 
-### 3. LSTMModel
-Training dei modelli LSTM con architettura Bidirectional LSTM (64 unità), Multi-Head Attention (4 heads), Dropout + BatchNormalization. Sequence length: 10 giri.
+2. **Load Models**
+   - Models automatically loaded from `Model/` directory
+   - Requires: `.keras` files, scalers, config
 
-| Modello | Metrica | Target | Ottenuto |
-|---------|---------|--------|----------|
-| Pit | AUC-ROC | ≥ 0.90 | 0.94 |
-| Pit | F1 Score | ≥ 0.70 | 0.75 |
-| Compound | Accuracy | ≥ 0.75 | 0.78 |
+3. **Select Race**
+   ```python
+   YEAR = 2024
+   ROUND = 5
+   DRIVER = 'VER'  # e.g., 'VER', 'HAM', 'LEC'
+   ```
 
-### 4. RaceSimulator
-Simulazione gare con i modelli addestrati: selezione guidata gara/pilota, predizione P(pit) per ogni giro, raccomandazione giro pit ottimale, confronto con strategia reale.
+4. **View Results**
+   - Pit probability curve
+   - Recommended vs actual pit stops
+   - Tire strategy comparison
 
-## Quick Start
+### Option B: Train from Scratch
 
-### Opzione A: Usare modelli pre-addestrati
-1. Apri `04_RaceSimulator.ipynb` in Colab
-2. Carica i file del modello
-3. Seleziona anno, gara, pilota
-4. Visualizza risultati
+Execute notebooks in sequence:
 
-### Opzione B: Training da zero
-Esegui i notebook in ordine: DataLoader → DataAnalysis → LSTMModel → RaceSimulator
+```
+DataLoader → DataAnalysis → LSTMModel → RaceSimulator
+   (45min)      (10min)     (1-2h)       (5min)
+```
 
-## Limitazioni Note
+**Note**: DataLoader is slow due to FastF1 API rate limits.
 
-- Compound prediction: Accuracy ~78%, tende a preferire compound comuni
-- Safety Car: Il modello genera falsi positivi durante SC
-- Ultimo stint: FP inevitabili perché il modello non sa che è l'ultimo stint
-- Stint corti: Con meno di 5 giri di dati, le predizioni sono meno affidabili
-- Condizioni wet: Pochi dati di training per gare bagnate
+---
 
-## Riferimenti
+## 📚 Pipeline Details
 
-- [FastF1 Documentation](https://docs.fastf1.dev/)
-- [Keras LSTM Guide](https://keras.io/api/layers/recurrent_layers/lstm/)
+### 1. **DataLoader** (`01_DataLoader.ipynb`)
 
-## Disclaimer
+Downloads telemetry data from FastF1 API for specified years.
 
-I marchi Formula 1, F1, FIA Formula One World Championship, Grand Prix e relativi sono proprietà di Formula One Licensing BV. Questo progetto NON è affiliato, approvato o connesso a Formula One Management, FIA, o alcun team/pilota F1.
+**Features:**
+- Incremental download (year-by-year)
+- Local caching for faster re-runs
+- Handles API rate limits automatically
+
+**Output:** `f1_dataset_combined.pkl`
+
+---
+
+### 2. **DataAnalysis** (`02_DataAnalysis.ipynb`)
+
+Exploratory data analysis, cleaning, and feature engineering.
+
+**Key Steps:**
+- Remove outliers and invalid laps
+- Handle missing values
+- Convert timedeltas to seconds
+- Encode categorical features
+- Create derived features (tire degradation, gap to leader, etc.)
+- Analyze compound distribution and pit patterns
+
+**Output:** `f1_dataset_clean.pkl`, `label_encoder.pkl`
+
+---
+
+### 3. **LSTMModel** (`03_LSTMModel.ipynb`)
+
+Train LSTM models with proper regularization and class balancing.
+
+**Architecture:**
+
+**PIT Model (Binary):**
+```
+Input (10 laps, 103 features)
+  ↓
+Masking (ignore padding)
+  ↓
+GaussianNoise(0.05)
+  ↓
+LSTM(64, dropout=0.4, recurrent_dropout=0.3, L2=0.01)
+  ↓
+LayerNormalization
+  ↓
+LSTM(32, dropout=0.4, recurrent_dropout=0.3, L2=0.01)
+  ↓
+Dense(32, relu, L2=0.01) + BatchNorm + Dropout(0.5)
+  ↓
+Dense(1, sigmoid)
+```
+
+**COMPOUND Model (Multi-class):**
+```
+Input (10 laps, 103 features)
+  ↓
+Masking (ignore padding)
+  ↓
+GaussianNoise(0.05)
+  ↓
+LSTM(64, dropout=0.5, recurrent_dropout=0.3, L2=0.01)
+  ↓
+LayerNormalization
+  ↓
+MultiHeadAttention(4 heads, key_dim=24)  # Only in COMPOUND
+  ↓
+Residual Connection + LayerNormalization
+  ↓
+LSTM(32, dropout=0.5, recurrent_dropout=0.3, L2=0.01)
+  ↓
+Dense(32, relu, L2=0.01) + BatchNorm + Dropout(0.5)
+  ↓
+Dense(4, softmax)
+```
+
+---
+
+### 4. **RaceSimulator** (`04_RaceSimulator.ipynb`)
+
+Simulate real races with trained models.
+
+**Features:**
+- Interactive race/driver selection
+- Lap-by-lap probability updates
+- Optimal pit window recommendations
+- Visual comparison: predicted vs actual strategy
+- Detailed pit stop analysis
+- Export results to CSV/PNG
+
+**Output:** Simulation results, charts, summaries
+
+---
+
+## 📖 References
+
+### Libraries & Frameworks
+- [FastF1 Documentation](https://docs.fastf1.dev/) - F1 telemetry data API
+- [Keras LSTM Guide](https://keras.io/api/layers/recurrent_layers/lstm/) - LSTM layer documentation
+- [TensorFlow](https://www.tensorflow.org/) - Deep learning framework
+
+### Research & Techniques
+- [Focal Loss Paper](https://arxiv.org/abs/1708.02002) - Better than class weights for imbalance
+- [Attention Mechanism](https://arxiv.org/abs/1706.03762) - Transformer architecture
+- [Time Series Classification](https://arxiv.org/abs/1809.04356) - Deep learning survey
+
+### F1 Strategy
+- [F1 Tire Compounds Explained](https://www.formula1.com/en/latest/article.the-various-compound-types-explained.html)
+- [Pit Stop Strategy Analysis](https://www.racefans.net/f1-information/going-to-a-race/pit-stops/)
+
+---
+
+## 🤝 Contributing
+
+This is an academic/research project. Contributions, suggestions, and improvements are welcome!
+
+**Areas for contribution:**
+- Additional feature engineering
+- Alternative model architectures
+- Better visualization techniques
+- Performance optimizations
+- Documentation improvements
+
+---
+
+## 📄 License
+
+This project is for educational and research purposes only.
+
+**Disclaimer:**
+The trademarks Formula 1, F1, FIA Formula One World Championship, Grand Prix, and related marks are property of Formula One Licensing BV. This project is NOT affiliated with, endorsed by, or connected to Formula One Management, FIA, or any F1 team/driver.
