@@ -1,0 +1,89 @@
+MIT License
+
+Copyright (c) 2025 Federico Sabbadini
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+================================================================================
+                              DATA DISCLAIMER
+================================================================================
+
+This project uses Formula 1 timing data obtained through the FastF1 library
+(https://github.com/theOehrly/Fast-F1), which is released under MIT License.
+
+FastF1 accesses publicly available timing data broadcast during live F1 
+sessions. This data is not obtained through official F1 APIs or paid services.
+
+
+USAGE CONDITIONS
+----------------
+
+1. This project is for ACADEMIC and EDUCATIONAL purposes only
+2. No commercial use is intended or permitted
+3. No raw F1 data is redistributed - only aggregated analysis results
+4. The trained models are derivative works based on statistical patterns
+
+
+INTELLECTUAL PROPERTY NOTICE
+----------------------------
+
+Formula 1, F1, FIA Formula One World Championship, Grand Prix, and related 
+marks are trademarks of Formula One Licensing BV.
+
+This project is NOT affiliated with, endorsed by, or connected to:
+- Formula One Management (FOM)
+- Formula One Licensing BV
+- Federation Internationale de l'Automobile (FIA)
+- Any F1 team or driver
+
+Per Formula 1 Guidelines (https://www.formula1.com/en/information/guidelines):
+"Limited use of Other Intellectual Property Rights for educational purposes 
+may be acceptable where the use is justified, limited, and non-commercial."
+
+This project falls under educational/academic fair use as:
+- It is a university thesis project
+- No F1 logos, images, or branded content are used
+- Only statistical/numerical timing data is processed
+- Output consists solely of ML model predictions and analysis
+
+
+FASTF1 LIBRARY
+--------------
+
+FastF1 is an open-source project (MIT License) maintained since 2020.
+Repository: https://github.com/theOehrly/Fast-F1
+Documentation: https://docs.fastf1.dev/
+
+FastF1's own disclaimer states:
+"FastF1 and this website are unofficial and are not associated in any way 
+with the Formula 1 companies."
+
+Hundreds of academic and open-source projects use FastF1 for F1 data analysis
+without reported legal issues from Formula One Management.
+
+
+CONTACT
+-------
+
+For questions regarding data usage in this project:
+Federico Sabbadini - University of Brescia
+
+For FastF1 library questions:
+https://github.com/theOehrly/Fast-F1/discussions

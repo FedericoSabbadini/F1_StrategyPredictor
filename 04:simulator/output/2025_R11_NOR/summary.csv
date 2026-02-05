@@ -1,0 +1,4 @@
+Stint,Compound,RecLap,RecProb,ActualLap,Diff,NextCompound,PredCompound,CompMatch
+1,MEDIUM,12.0,0.731,20.0,8.0,HARD,HARD,True
+2,HARD,46.0,0.914,52.0,6.0,MEDIUM,HARD,False
+3,MEDIUM,,,,,,,
