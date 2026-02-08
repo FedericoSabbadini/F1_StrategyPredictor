@@ -34,11 +34,11 @@ The models are based on LSTM architecture with attention mechanisms (compound mo
 
 | Model | Metric | Value | 
 |-------|--------|-------|
-| **PIT** | AUC-ROC | 0.772 |
-| **PIT** | F1 Score | 0.523 |
-| **PIT** | Accuracy | 0.756 |
-| **COMPOUND** | Accuracy | 0.675 |
-| **COMPOUND** | F1 (weighted) | 0.664 |
+| **PIT** | AUC-ROC | 0.788 |
+| **PIT** | F1 Score | 0.499 |
+| **PIT** | Accuracy | 0.755 |
+| **COMPOUND** | Accuracy | 0.711 |
+| **COMPOUND** | F1 (weighted) | 0.714 |
 
 ---
 
