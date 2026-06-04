@@ -13,7 +13,7 @@ class Race:
 
     def __init__(
         self,
-        url: str = "https://raw.githubusercontent.com/FedericoSabbadini/f1-strategy-predictor/main/03_model/output/Model/",
+        url: str = "https://raw.githubusercontent.com/FedericoSabbadini/f1-strategy-predictor/main/03_model/LSTM/output/Model/",
     ):
         # Store models and preprocessing tools
         self.model_pit = self.load_keras_from_url(url + "f1_pit_model.keras")
@@ -24,10 +24,11 @@ class Race:
 
         config = json.loads(self.download_bytes(url + "modelConfig.json"))
         # Model configuration
-        self.features = config["features"]
-        self.seq_len = config["seq_len"]
-        self.pit_threshold = config["pit_threshold"]
-        self.pit_thresholdAdd = config["pit_thresholdAdd"]
+        self.features = config["FEATURES"]
+        self.seq_len = config["sequence_length"]
+        self.pit_thresholdAdd = 0.21
+        self.pit_threshold = config["pit_threshold"] + self.pit_thresholdAdd
+        self.df_f1 = self.get_f1_dataset(url)
 
 
     # Sends an HTTP GET request
@@ -44,3 +45,8 @@ class Race:
         model = load_model(path)
         os.remove(path)
         return model
+    
+    def get_f1_dataset(self, base_url: str) -> pd.DataFrame:
+        url = base_url + "f1_dataset_featured.pkl"
+        df = pd.read_pickle(url)
+        return df
