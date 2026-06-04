@@ -9,12 +9,12 @@ dependencies = [
     "fastapi>=0.110.0",
     "fastf1>=3.0.2",
     "matplotlib>=3.8.0",
-    "numpy==1.26.4",
     "pandas<3",
     "scikit-learn>=1.4.0",
     "seaborn>=0.13.0",
-    "tensorflow==2.15.1",
     "requests>=2.31.0",
+    "tensorflow>=2.21.0",
+    "numpy>=1.26.4",
 ]
 
 [tool.uv]
