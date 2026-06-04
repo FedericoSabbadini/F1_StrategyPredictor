@@ -1,9 +1,11 @@
 import warnings
-warnings.filterwarnings('ignore')
+warnings.filterwarnings("ignore")
 import pandas as pd
 import numpy as np
 if not hasattr(np, "NaN"):
     np.NaN = np.nan
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from modelQuery import RaceSimulator
 from modelLoad import Race
@@ -11,7 +13,7 @@ import base64, io
 
 
 def simulate(yearI: int, roundI: int, driverI: str):
-
+    fig = None
     
     YEAR = yearI
     ROUND = roundI
@@ -183,11 +185,10 @@ def simulate(yearI: int, roundI: int, driverI: str):
     ax2.grid(True, alpha=0.3)
 
     plt.tight_layout()
+
     simulation_file = sim_df.to_csv(index=False)
 
-
-
-    # Summary CSV
+    # --- summary ---
     pit_summary = []
     for stint in range(1, num_stints + 1):
         row = {
@@ -223,13 +224,13 @@ def simulate(yearI: int, roundI: int, driverI: str):
 
     pitSummary_file = pd.DataFrame(pit_summary).to_csv(index=False)
 
-    
-    # Salva chart come base64 PNG
+    # --- chart ---
     buf = io.BytesIO()
     fig.savefig(buf, format='png', dpi=150, bbox_inches='tight')
     buf.seek(0)
-    chart_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    chart_base64 = base64.b64encode(buf.read()).decode("utf-8")
     buf.close()
-    plt.close(fig)
+
+    plt.close("all")
 
     return simulation_file, pitSummary_file, chart_base64
