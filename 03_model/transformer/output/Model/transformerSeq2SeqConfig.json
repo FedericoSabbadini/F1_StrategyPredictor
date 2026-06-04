@@ -112,7 +112,7 @@
     "Team_Red Bull Racing",
     "Team_Williams"
   ],
-  "pit_threshold": 0.3851265609264374,
+  "pit_threshold": 0.7754372358322144,
   "compound_classes": [
     "HARD",
     "INTERMEDIATE",
@@ -120,10 +120,10 @@
     "SOFT"
   ],
   "metrics": {
-    "pit_auc": 0.8108517076362738,
-    "pit_f1": 0.5245180926614812,
-    "pit_accuracy": 0.7900395729112223,
-    "compound_accuracy": 0.6731128201299186,
-    "compound_f1": 0.6591381533738445
+    "pit_auc": 0.8620141148350338,
+    "pit_f1": 0.6161639419755929,
+    "pit_accuracy": 0.8755319943253939,
+    "compound_accuracy": 0.6969312327335175,
+    "compound_f1": 0.6797883233259536
   }
 }
