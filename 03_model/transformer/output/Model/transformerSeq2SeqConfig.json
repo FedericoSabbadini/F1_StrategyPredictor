@@ -1,12 +1,20 @@
 {
-  "architecture": "causal_transformer_seq2seq",
+  "architecture": "causal_transformer_seq2seq_pytorch",
   "sequence_strategy": "one_sequence_per_race",
   "max_seq_len": 78,
   "n_features": 103,
-  "d_model": 64,
-  "num_heads": 4,
-  "ff_dim": 128,
-  "num_blocks": 3,
+  "pit_model": {
+    "d_model": 96,
+    "num_heads": 4,
+    "ff_dim": 288,
+    "num_blocks": 3
+  },
+  "comp_model": {
+    "d_model": 128,
+    "num_heads": 4,
+    "ff_dim": 384,
+    "num_blocks": 4
+  },
   "FEATURES": [
     "LapNumber",
     "Stint",
@@ -112,7 +120,7 @@
     "Team_Red Bull Racing",
     "Team_Williams"
   ],
-  "pit_threshold": 0.7754372358322144,
+  "pit_threshold": 0.2956468164920807,
   "compound_classes": [
     "HARD",
     "INTERMEDIATE",
@@ -120,10 +128,10 @@
     "SOFT"
   ],
   "metrics": {
-    "pit_auc": 0.8620141148350338,
-    "pit_f1": 0.6161639419755929,
-    "pit_accuracy": 0.8755319943253939,
-    "compound_accuracy": 0.6969312327335175,
-    "compound_f1": 0.6797883233259536
+    "pit_auc": 0.856640096239702,
+    "pit_f1": 0.5954258675078864,
+    "pit_accuracy": 0.8467856342865676,
+    "compound_accuracy": 0.6092735010826551,
+    "compound_f1": 0.5645449937826523
   }
 }
